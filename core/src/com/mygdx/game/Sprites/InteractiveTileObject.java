@@ -6,14 +6,16 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.MyGdxGame;
 
-public class InteractiveTileObject {
+public abstract class InteractiveTileObject {
     protected World world;
     protected TiledMap map;
     protected TiledMapTile tile;
     protected Rectangle bounds;
     protected Body body;
 
-    public InteractiveTileObject(World world, TiledMap map, Rectangle bounds) {
+    protected Fixture fixture;
+
+    public InteractiveTileObject(World world, TiledMap map, Rectangle bounds, boolean isSensor) {
         this.world = world;
         this.map = map;
         this.bounds = bounds;
@@ -29,6 +31,9 @@ public class InteractiveTileObject {
 
         shape.setAsBox(bounds.getWidth() / 2 / MyGdxGame.PPM, bounds.getHeight() / 2 / MyGdxGame.PPM);
         fdef.shape = shape;
-        body.createFixture(fdef);
+        fdef.isSensor = isSensor;
+        fixture = body.createFixture(fdef);
     }
+
+    public abstract void onCollision();
 }

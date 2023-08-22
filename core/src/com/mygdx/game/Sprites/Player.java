@@ -3,6 +3,7 @@ package com.mygdx.game.Sprites;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
@@ -110,5 +111,12 @@ public class Player extends Sprite {
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
+
+        EdgeShape feet = new EdgeShape();
+        feet.set(new Vector2(-10 / MyGdxGame.PPM, -15 / MyGdxGame.PPM), new Vector2(10 / MyGdxGame.PPM, 15 / MyGdxGame.PPM));
+        fdef.shape = feet;
+        fdef.isSensor = true;
+
+        b2body.createFixture(fdef).setUserData("feet");
     }
 }
