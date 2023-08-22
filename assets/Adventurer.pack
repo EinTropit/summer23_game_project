@@ -1,0 +1,12 @@
+
+Adventurer.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+adventurer-Sheet
+  rotate: false
+  xy: 1, 1
+  size: 350, 407
+  orig: 350, 407
+  offset: 0, 0
+  index: -1
