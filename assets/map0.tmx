@@ -1,61 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="20" tilewidth="24" tileheight="24" infinite="0" nextlayerid="20" nextobjectid="46">
- <tileset firstgid="1" source="oak forest.tsx"/>
- <tileset firstgid="316" source="decor.tsx"/>
- <tileset firstgid="328" source="chests.tsx"/>
- <tileset firstgid="368" source="background.tsx"/>
- <imagelayer id="17" name="bg">
-  <image source="white bg.png" width="1200" height="480"/>
- </imagelayer>
- <layer id="1" name="map" width="50" height="20">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="34">
+ <tileset firstgid="1" source="Palm_tree_isnland_tiles.tsx"/>
+ <tileset firstgid="86" name="sky" tilewidth="32" tileheight="32" tilecount="48" columns="12">
+  <image source="Palm Tree Island/Background/BG Image.png" width="384" height="128"/>
+ </tileset>
+ <layer id="5" name="Tile Layer 2" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJzdlktOwzAQhieAoKhroCw4QaWqqFseTkNVjoDUG/CQuAESh4BLsGXPDTgMB4AZ2UaTweM4gZS0v/TVju3U84+dOADrqfF/B/BHGiusmrruo8jSxnXVwzayg/RYuRsZvwwfPqeXSm6ngfZ9+sH2KVg+kcOKeZrG/iaQ0nI6cH28XeZ7KOI2SNEwTq5zJZdnkf1LOT0QjMD60Pr4vXTt13DA+I36rH6s1PtiHoPkYPeFLws3xoh23+dF67GXldcz9nxIUd4vXA60XC9Y/b7Gf9eRAevRI31WaYa8OubKmLZir6OTxPex16SdMEr6SEBqE9lg5RPyHBg3gbiHowTalHxHEC9Q9lPloQsK+dD8LEM57vNTttdngX0fehZiPkJ+8oTnyZ8t2rfQ3LUb1k/30CXf41oZqqf44H78vbfIHXIF9myi8hq5EfNuQfnMyuBnLDym77iyerE14RHsOaTxwMbSt8Q7I3RurwKjNfEh12PY0jxfmtZIbg==
+   eJzt0lcLgzAYheH8yk5rp512271sq/+7rxQhSC6M5CatBx4M4schiULYmwqqqKGOBppw0IKLNjroWt6r25nt1Z1XvcszN1f0pnT65bXuXpP0DPQWudu07196k3PuS88BPAwxwhgTTDGDL77/iLzO8302CyyxwhobbBFghz0OOOKkmC+aMy644oY7HgjxxAtvRIgNdtvSGxvqLVPmF/IBciJf/A==
   </data>
  </layer>
- <objectgroup id="6" name="tiles" offsetx="-0.5" offsety="0">
-  <object id="26" x="192" y="240">
-   <polygon points="0,0 96,0 96,24 0,24"/>
-  </object>
-  <object id="28" x="336" y="192" width="24" height="24"/>
-  <object id="29" x="408" y="192" width="24" height="72"/>
-  <object id="30" x="480" y="192" width="24" height="48"/>
-  <object id="31" x="552" y="192" width="24" height="24"/>
-  <object id="32" x="648" y="144" width="144" height="72"/>
-  <object id="33" x="816" y="144" width="144" height="72"/>
-  <object id="34" x="1008" y="96">
-   <polygon points="0,0 144,0 144,72 96,72 96,48 48,48 48,96 144,96 144,144 0,144"/>
-  </object>
-  <object id="35" x="1200" y="360">
-   <polygon points="0,0 0,120 -528,120 -528,24 -360,24 -360,0"/>
-  </object>
-  <object id="36" x="600" y="384">
-   <polygon points="0,0 0,96 -600,96 -600,-96 -504,-96 -312,0 -264,0 -216,24 -144,24 -96,0 0,0"/>
-  </object>
- </objectgroup>
- <objectgroup id="7" name="chest">
-  <object id="22" x="408" y="384">
-   <polygon points="0,0 48,0 48,24 0,24"/>
-  </object>
-  <object id="23" x="744" y="120">
-   <polygon points="0,0 48,0 48,24 0,24"/>
-  </object>
-  <object id="24" x="1056" y="168">
-   <polygon points="0,0 48,0 48,24 0,24 0,0"/>
-  </object>
- </objectgroup>
- <objectgroup id="8" name="shop">
-  <object id="25" x="960" y="360">
-   <polygon points="0,0 0,-96 120,-96 120,0 0,0"/>
-  </object>
- </objectgroup>
- <layer id="19" name="temp" width="50" height="20">
+ <layer id="1" name="Background" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt0rEJACAQA8C4iu4/gNvZCoJiIVjcQaovUuQTAABY1ZL0vE8r+875zj9u/8OOcDYAL0cdvg==
+   eJwTZmBgEB7CmB2IVZCwDBofhjmobK8IAypQZ8AOhGhsLy6AzV70sMKFObCoVcVjlysQu0GxNIVuJlYtNr3k2qvMAPGfBR3sNSfCTE80tjgWcXz2siKpYwRiZiLtJQbgsxc5D8DClB724gMg/zNRgCXJtJfa+X4g7ZUgM5xG8Sge6RgAmEQjOw==
   </data>
  </layer>
- <objectgroup id="18" name="temp">
-  <object id="43" x="696" y="312" width="144" height="24"/>
-  <object id="44" x="864" y="360" width="312" height="24"/>
-  <object id="45" x="0" y="312" width="648" height="24"/>
+ <objectgroup id="2" name="Ground">
+  <object id="1" x="608" y="224" width="32" height="32"/>
+  <object id="2" x="704" y="224" width="32" height="32"/>
+  <object id="3" x="800" y="224" width="32" height="32"/>
+  <object id="4" x="256" y="256" width="64" height="64"/>
+  <object id="5" x="160" y="256" width="32" height="64"/>
+  <object id="17" x="800" y="128" width="128" height="32"/>
+  <object id="20" x="96" y="32" width="512" height="128"/>
+  <object id="22" x="96" y="128" width="32" height="320"/>
+  <object id="23" x="96" y="416" width="320" height="32"/>
+  <object id="24" x="384" y="320" width="544" height="128"/>
+  <object id="25" x="896" y="32" width="32" height="320"/>
+  <object id="27" x="576" y="32" width="352" height="32"/>
+  <object id="28" x="416" y="128" width="64" height="96"/>
+  <object id="29" x="704" y="32" width="32" height="64"/>
+  <object id="33" x="0" y="608" width="960" height="32"/>
+ </objectgroup>
+ <objectgroup id="3" name="Object Layer 2">
+  <object id="32" x="832" y="96" width="32" height="32"/>
  </objectgroup>
 </map>

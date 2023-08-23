@@ -32,21 +32,6 @@ public class B2WorldCreator {
             body.createFixture(fdef);
         }
 
-        // create border bodies/fixtures
-        for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class))
-        {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / MyGdxGame.PPM, (rect.getY() + rect.getHeight() / 2) / MyGdxGame.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth() / 2 / MyGdxGame.PPM, rect.getHeight() / 2 / MyGdxGame.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-
         // create chests bodies/fixtures
         for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class))
         {
@@ -55,6 +40,7 @@ public class B2WorldCreator {
             new Chest(world, map, rect);
         }
 
+        /*
         //temp - remove when you understand how to polygon
         for(MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class))
         {
@@ -69,5 +55,7 @@ public class B2WorldCreator {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
+
+         */
     }
 }

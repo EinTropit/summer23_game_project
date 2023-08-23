@@ -1,0 +1,61 @@
+
+Captain Clown Nose.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+DeadGround
+  rotate: false
+  xy: 1, 331
+  size: 512, 64
+  orig: 512, 64
+  offset: 0, 0
+  index: -1
+Dead_Hit
+  rotate: false
+  xy: 1, 265
+  size: 512, 64
+  orig: 512, 64
+  offset: 0, 0
+  index: -1
+Hit
+  rotate: false
+  xy: 1, 199
+  size: 512, 64
+  orig: 512, 64
+  offset: 0, 0
+  index: -1
+Idle
+  rotate: false
+  xy: 1, 133
+  size: 512, 64
+  orig: 512, 64
+  offset: 0, 0
+  index: -1
+Run
+  rotate: false
+  xy: 1, 67
+  size: 512, 64
+  orig: 512, 64
+  offset: 0, 0
+  index: -1
+Ground
+  rotate: false
+  xy: 515, 331
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: -1
+Jump
+  rotate: false
+  xy: 1, 1
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: -1
+Fall
+  rotate: false
+  xy: 515, 265
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
