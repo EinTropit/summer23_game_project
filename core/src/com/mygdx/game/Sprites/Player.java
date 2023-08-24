@@ -16,39 +16,63 @@ public class Player extends Sprite {
     public State previousState;
     public World world;
     public Body b2body;
-    private TextureAtlas atlas;
-    private Animation<TextureRegion> playerStand;
-    private Animation<TextureRegion> playerRun;
-    private Animation<TextureRegion> playerJump;
-    private TextureRegion playerFall;
+    //private TextureAtlas atlas;
+    private Array<Animation<TextureRegion>> playerStand;
+    private Array<Animation<TextureRegion>> playerRun;
+    private Array<Animation<TextureRegion>> playerJump;
+    private Array<TextureRegion> playerFall;
     private float stateTimer;
     private boolean runningRight;
-    private static final int FRAME_WIDTH = 66;
+    private int hasSword;
+    private static final int FRAME_WIDTH = 64;
     private static final int FRAME_HEIGHT = 40;
     //private static final int TXTR_IN_ROW = 7;
 
 
     public Player(World world, PlayScreen screen) {
-        atlas= screen.getAtlas();
+
         this.world = world;
         currentState = State.STANDING;
         previousState = State.STANDING;
         stateTimer = 0;
         runningRight = true;
+        hasSword = 0;
+
+        playerStand = new Array<Animation<TextureRegion>>(2);
+        playerRun = new Array<Animation<TextureRegion>>(2);
+        playerJump = new Array<Animation<TextureRegion>>(2);
+        playerFall = new Array<TextureRegion>(2);
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
+        TextureAtlas atlas = new TextureAtlas("character/Captain_No_Sword.pack");
         for (int i = 0; i < 5; i++)
             frames.add(new TextureRegion(atlas.findRegion("Idle"), i * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));
-        playerStand = new Animation<TextureRegion>(0.1f, frames);
+        playerStand.add(new Animation<TextureRegion>(0.1f, frames));
         frames.clear();
         for (int i = 0; i < 6; i++)
             frames.add(new TextureRegion(atlas.findRegion("Run"), i * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));
-        playerRun = new Animation<TextureRegion>(0.1f, frames);
+        playerRun.add(new Animation<TextureRegion>(0.1f, frames));
         frames.clear();
         for (int i = 0; i < 3; i++)
             frames.add(new TextureRegion(atlas.findRegion("Jump"), i * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));
-        playerJump = new Animation<TextureRegion>(0.1f, frames);
-        playerFall = new TextureRegion(atlas.findRegion("Fall"), 0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+        playerJump.add(new Animation<TextureRegion>(0.1f, frames));
+        frames.clear();
+        playerFall.add(new TextureRegion(atlas.findRegion("Fall"), 0, 0, FRAME_WIDTH, FRAME_HEIGHT));
+
+        //atlas.dispose();
+        TextureAtlas atlas2 = new TextureAtlas("character/Captain_Sword.pack");
+        for (int i = 0; i < 5; i++)
+            frames.add(new TextureRegion(atlas2.findRegion("Idle"), i * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));
+        playerStand.add(new Animation<TextureRegion>(0.1f, frames));
+        frames.clear();
+        for (int i = 0; i < 6; i++)
+            frames.add(new TextureRegion(atlas2.findRegion("Run"), i * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));
+        playerRun.add(new Animation<TextureRegion>(0.1f, frames));
+        frames.clear();
+        for (int i = 0; i < 3; i++)
+            frames.add(new TextureRegion(atlas2.findRegion("Jump"), i * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));
+        playerJump.add(new Animation<TextureRegion>(0.1f, frames));
+        playerFall.add(new TextureRegion(atlas2.findRegion("Fall"), 0, 0, FRAME_WIDTH, FRAME_HEIGHT));
 
         definePlayer();
 
@@ -67,17 +91,17 @@ public class Player extends Sprite {
         TextureRegion region;
         switch (currentState) {
             case JUMPING:
-                region = playerJump.getKeyFrame(stateTimer);
+                region = playerJump.get(hasSword).getKeyFrame(stateTimer);
                 break;
             case RUNNING:
-                region = playerRun.getKeyFrame(stateTimer, true);
+                region = playerRun.get(hasSword).getKeyFrame(stateTimer, true);
                 break;
             case FALLING:
-                region = playerFall;
+                region = playerFall.get(hasSword);
                 break;
             case STANDING:
             default:
-                region = playerStand.getKeyFrame(stateTimer, true);
+                region = playerStand.get(hasSword).getKeyFrame(stateTimer, true);
                 break;
         }
 
@@ -114,6 +138,8 @@ public class Player extends Sprite {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(10 / MyGdxGame.PPM);
+        fdef.filter.categoryBits = MyGdxGame.PLAYER_BIT;
+        fdef.filter.maskBits = MyGdxGame.DEFAULT_BIT | MyGdxGame.SWORD_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
@@ -124,5 +150,9 @@ public class Player extends Sprite {
         fdef.isSensor = true;
 
         b2body.createFixture(fdef).setUserData("feet");
+    }
+
+    public void setSword(boolean hasSword) {
+        this.hasSword = hasSword ? 1 : 0;
     }
 }

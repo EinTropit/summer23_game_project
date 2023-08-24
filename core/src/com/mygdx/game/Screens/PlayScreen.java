@@ -49,7 +49,7 @@ public class PlayScreen implements Screen {
     public PlayScreen(MyGdxGame game) {
         this.game = game;
 
-        atlas = new TextureAtlas("character/Captain clown Nose.pack");
+        atlas = new TextureAtlas("character/Captain_No_Sword.pack");
 
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(MyGdxGame.V_WIDTH / MyGdxGame.PPM, MyGdxGame.V_HEIGHT / MyGdxGame.PPM, gameCam);
@@ -63,9 +63,9 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
 
-        new B2WorldCreator(world, map);
-
         player = new Player(world, this);
+
+        new B2WorldCreator(world, map, player);
 
         world.setContactListener(new WorldContactListener());
     }

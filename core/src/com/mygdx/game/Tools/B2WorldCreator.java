@@ -9,9 +9,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Sprites.Chest;
+import com.mygdx.game.Sprites.Player;
+import com.mygdx.game.Sprites.Sword;
 
 public class B2WorldCreator {
-    public B2WorldCreator(World world, TiledMap map) {
+    public B2WorldCreator(World world, TiledMap map, Player player) {
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
@@ -32,12 +34,12 @@ public class B2WorldCreator {
             body.createFixture(fdef);
         }
 
-        // create chests bodies/fixtures
+        // create Sword/s bodies/fixtures
         for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class))
         {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            new Chest(world, map, rect);
+            new Sword(world, map, rect, player);
         }
 
         /*

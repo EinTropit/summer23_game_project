@@ -4,14 +4,17 @@
  <tileset firstgid="86" name="sky" tilewidth="32" tileheight="32" tilecount="48" columns="12">
   <image source="Palm Tree Island/Background/BG Image.png" width="384" height="128"/>
  </tileset>
- <layer id="5" name="Tile Layer 2" width="30" height="20">
+ <tileset firstgid="134" name="Sword_idle" tilewidth="32" tileheight="14" tilecount="1" columns="1">
+  <image source="character/Sword Idle 01.png" width="32" height="14"/>
+ </tileset>
+ <layer id="5" name="Sky" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt0lcLgzAYheH8yk5rp512271sq/+7rxQhSC6M5CatBx4M4schiULYmwqqqKGOBppw0IKLNjroWt6r25nt1Z1XvcszN1f0pnT65bXuXpP0DPQWudu07196k3PuS88BPAwxwhgTTDGDL77/iLzO8302CyyxwhobbBFghz0OOOKkmC+aMy644oY7HgjxxAtvRIgNdtvSGxvqLVPmF/IBciJf/A==
+   eJzt0ucKwjAYheFcpVVb96571z17375BCkGDmJI/0R54aAj9OLSJEO4mBw95FFCEjwAllFFBFTXHe007X3tN53V738wNNb0Jk351bfqtMnULvWnONun7l175nxvKs4kW2uigix5C9DEQzzuirj+9H4r3OyUzwhgTTDHDHAssscIaETaa+bTZYoc9DjjihDMuuOKGO2KL3a70xpZ6s2T5hTwAaKJf+g==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJwTZmBgEB7CmB2IVZCwDBofhjmobK8IAypQZ8AOhGhsLy6AzV70sMKFObCoVcVjlysQu0GxNIVuJlYtNr3k2qvMAPGfBR3sNSfCTE80tjgWcXz2siKpYwRiZiLtJQbgsxc5D8DClB724gMg/zNRgCXJtJfa+X4g7ZUgM5xG8Sge6RgAmEQjOw==
+   eJwTZmBgEB7CmB2IVZCwDBofhjmobK8IAypQZ8AOhGhsLzpow2MveljhwhxY1KrisdMViN2gWJoMN8OAEAlqsekl115lBoj/LOhgrzkRZnqiscWxiOOzlxVJHSMQMxNpLzEAn73IeQAWpuTaK4qECdmLD4D8z0QBliTTXmrn+4G0V4LMcBrFo3ikYwC6KyQA
   </data>
  </layer>
  <objectgroup id="2" name="Ground">
@@ -31,7 +34,7 @@
   <object id="29" x="704" y="32" width="32" height="64"/>
   <object id="33" x="0" y="608" width="960" height="32"/>
  </objectgroup>
- <objectgroup id="3" name="Object Layer 2">
-  <object id="32" x="832" y="96" width="32" height="32"/>
+ <objectgroup id="3" name="Sword">
+  <object id="32" x="838.873" y="120.928" width="19.0909" height="7.36364"/>
  </objectgroup>
 </map>
