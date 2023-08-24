@@ -1,9 +1,13 @@
 package com.mygdx.game.Sprites;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
@@ -11,7 +15,9 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
 
 public class Player extends Sprite {
-    public enum State { FALLING, JUMPING, STANDING, RUNNING }
+
+
+    public enum State { FALLING, JUMPING, STANDING, RUNNING, ATTACKING }
     public State currentState;
     public State previousState;
     public World world;
@@ -21,6 +27,8 @@ public class Player extends Sprite {
     private Array<Animation<TextureRegion>> playerRun;
     private Array<Animation<TextureRegion>> playerJump;
     private Array<TextureRegion> playerFall;
+    private Array<Animation<TextureRegion>> attackAnim;
+    private int rndAttack;
     private float stateTimer;
     private boolean runningRight;
     private int hasSword;
@@ -38,10 +46,16 @@ public class Player extends Sprite {
         runningRight = true;
         hasSword = 0;
 
+        MapObject object = screen.getMap().getLayers().get(3).getObjects().getByType(RectangleMapObject.class).first();
+        Rectangle startRect = ((RectangleMapObject) object).getRectangle();
+        definePlayer(startRect);
+
         playerStand = new Array<Animation<TextureRegion>>(2);
         playerRun = new Array<Animation<TextureRegion>>(2);
         playerJump = new Array<Animation<TextureRegion>>(2);
         playerFall = new Array<TextureRegion>(2);
+        attackAnim = new Array<Animation<TextureRegion>>(3);
+        rndAttack = 0;
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
         TextureAtlas atlas = new TextureAtlas("character/Captain_No_Sword.pack");
@@ -73,8 +87,13 @@ public class Player extends Sprite {
             frames.add(new TextureRegion(atlas2.findRegion("Jump"), i * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));
         playerJump.add(new Animation<TextureRegion>(0.1f, frames));
         playerFall.add(new TextureRegion(atlas2.findRegion("Fall"), 0, 0, FRAME_WIDTH, FRAME_HEIGHT));
-
-        definePlayer();
+        frames.clear();
+        for (int j = 1; j < 4; j++) {
+            for (int i = 0; i < 3; i++)
+                frames.add(new TextureRegion(atlas2.findRegion("Attack " + j), i * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));
+            attackAnim.add(new Animation<TextureRegion>(0.1f, frames));
+            frames.clear();
+        }
 
         setBounds(0, 0, FRAME_WIDTH / MyGdxGame.PPM, FRAME_HEIGHT / MyGdxGame.PPM);
         setRegion(new TextureRegion(atlas.findRegion("Idle"), 0, 0, FRAME_WIDTH, FRAME_HEIGHT));
@@ -99,6 +118,9 @@ public class Player extends Sprite {
             case FALLING:
                 region = playerFall.get(hasSword);
                 break;
+            case ATTACKING:
+                region = attackAnim.get(rndAttack).getKeyFrame(stateTimer);
+                break;
             case STANDING:
             default:
                 region = playerStand.get(hasSword).getKeyFrame(stateTimer, true);
@@ -120,6 +142,8 @@ public class Player extends Sprite {
     }
 
     public State getState() {
+        if(previousState == State.ATTACKING && stateTimer <= 0.3f)
+            return State.ATTACKING;
         if(b2body.getLinearVelocity().y > 0)
             return State.JUMPING;
         if(b2body.getLinearVelocity().y < 0)
@@ -129,9 +153,9 @@ public class Player extends Sprite {
         return State.STANDING;
     }
 
-    public void definePlayer() {
+    public void definePlayer(Rectangle startRect) {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(32 * 5 / MyGdxGame.PPM, 32 * 8 / MyGdxGame.PPM);
+        bdef.position.set((startRect.getX() + startRect.getWidth() / 2) / MyGdxGame.PPM, (startRect.getY() + startRect.getHeight() / 2) / MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -154,5 +178,17 @@ public class Player extends Sprite {
 
     public void setSword(boolean hasSword) {
         this.hasSword = hasSword ? 1 : 0;
+    }
+
+    public Boolean hasSword() {
+        return hasSword == 1;
+    }
+
+    public void attack() {
+        if(currentState != State.ATTACKING) {
+            previousState = currentState = State.ATTACKING;
+            stateTimer = 0;
+            rndAttack = (int)(Math.random() * 3);
+        }
     }
 }
