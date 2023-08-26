@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Sprites.Crab;
 import com.mygdx.game.Sprites.Player;
 import com.mygdx.game.Tools.B2WorldCreator;
 import com.mygdx.game.Tools.WorldContactListener;
@@ -43,6 +44,7 @@ public class PlayScreen implements Screen {
     private Box2DDebugRenderer b2dr;
 
     private Player player;
+    private Crab crab;
 
 
 
@@ -63,9 +65,10 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
 
-        player = new Player(world, this);
+        player = new Player(this);
+        crab = new Crab(this, 10 * 32 / MyGdxGame.PPM, 8 * 32 / MyGdxGame.PPM);
 
-        new B2WorldCreator(world, map, player);
+        new B2WorldCreator(this);
 
         world.setContactListener(new WorldContactListener());
     }
@@ -75,6 +78,10 @@ public class PlayScreen implements Screen {
     }
 
     public TiledMap getMap() { return map; }
+
+    public World getWorld() { return  world; }
+
+    public Player getPlayer() { return  player; }
 
     @Override
     public void show() {
@@ -98,6 +105,7 @@ public class PlayScreen implements Screen {
         world.step(1/60f, 6, 2);
 
         player.update(dt);
+        crab.update(dt);
 
         // synchronize camera to player movement
         gameCam.position.x = Math.max(Math.min(player.b2body.getPosition().x, MyGdxGame.MAP_SIZE.x / MyGdxGame.PPM - MyGdxGame.V_WIDTH / 2 / MyGdxGame.PPM), MyGdxGame.V_WIDTH / 2 / MyGdxGame.PPM);
@@ -120,6 +128,7 @@ public class PlayScreen implements Screen {
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
+        crab.draw(game.batch);
         player.draw(game.batch);
         game.batch.end();
 

@@ -8,12 +8,16 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Sprites.Chest;
 import com.mygdx.game.Sprites.Player;
 import com.mygdx.game.Sprites.Sword;
 
 public class B2WorldCreator {
-    public B2WorldCreator(World world, TiledMap map, Player player) {
+    public B2WorldCreator(PlayScreen screen) {
+        World world = screen.getWorld();
+        TiledMap map = screen.getMap();
+        Player player = screen.getPlayer();
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
@@ -39,7 +43,7 @@ public class B2WorldCreator {
         {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            new Sword(world, map, rect, player);
+            new Sword(screen, rect);
         }
 
         /*

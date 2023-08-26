@@ -1,11 +1,13 @@
 package com.mygdx.game.Sprites;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Screens.PlayScreen;
 
 public abstract class InteractiveTileObject {
     protected World world;
@@ -15,11 +17,15 @@ public abstract class InteractiveTileObject {
     protected Body body;
 
     protected Fixture fixture;
+    protected boolean setToDestroy;
+    protected boolean destroyed;
 
-    public InteractiveTileObject(World world, TiledMap map, Rectangle bounds, boolean isSensor) {
-        this.world = world;
-        this.map = map;
+    public InteractiveTileObject(PlayScreen screen, Rectangle bounds, boolean isSensor) {
+        this.world = screen.getWorld();
+        this.map = screen.getMap();
         this.bounds = bounds;
+        setToDestroy = false;
+        destroyed = false;
 
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
